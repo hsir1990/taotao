@@ -5,7 +5,7 @@ package com.taotao.service;
  *
  */
 
-import com.taotao.commom.pojo.EasyUIDataGridResult;
+import com.taotao.common.pojo.EasyUIDataGridResult;
 
 public interface ItemService {
 	/**
