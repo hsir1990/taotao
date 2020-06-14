@@ -1,12 +1,14 @@
 package com.taotao.content.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.taotao.common.pojo.EasyUITreeNode;
+import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.conent.service.ContentCategoryService;
 import com.taotao.mapper.TbContentCategoryMapper;
 import com.taotao.pojo.TbContentCategory;
@@ -40,6 +42,29 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 		}
 		//6.返回
 		return nodes;
+	}
+	@Override
+	public TaotaoResult createContentCategory(Long parentId, String name) {
+		//1.构建对象，补全其他的属性
+		TbContentCategory category = new  TbContentCategory();
+		category.setCreated(new Date());
+		category.setIsParent(false);
+		category.setName(name);
+		category.setParentId(parentId);
+		category.setSortOrder(1);
+		category.setStatus(1);
+		category.setUpdated(category.getCreated());
+		//2.插入contentcategory表数据
+		mapper.insertSelective(category);
+		//3.返回taotaoresult  包含内容分类的id  需要主键返回
+		
+		//判断如果要添加的节点的父节点本身叶子节点  需要更新其为父节点
+		TbContentCategory parent = mapper.selectByPrimaryKey(parentId);
+		if(parent.getIsParent() == false) {//原本就是叶子节点
+			parent.setIsParent(true);
+			mapper.updateByPrimaryKeySelective(parent); //更新节点的is_parent属性为true
+		}
+		return TaotaoResult.ok(category);
 	}
 
 }

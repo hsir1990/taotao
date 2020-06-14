@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.taotao.common.pojo.EasyUITreeNode;
+import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.conent.service.ContentCategoryService;
 
 
@@ -35,4 +36,26 @@ public class ContentCategoryControl {
 		//2.注入服务
 		//3调用
 		return service.getContentCategoryList(parentId);
-	}}
+	}
+	/**
+	 * url : '/content/category/create',
+		
+		method : "post",
+		参数: 
+		parentId:就是新增节点的父节点的Id
+		name：新增节点的文本
+		返回值taotaoresult  包含分类的id
+	 */
+	/**
+	 * 添加节点
+	 * @param parentId
+	 * @param name
+	 * @return
+	 */
+	@RequestMapping(value="\"/content/category/create",method=RequestMethod.POST)
+	@ResponseBody
+	public TaotaoResult createContentCategory(Long parentId, String name) {
+		return service.createContentCategory(parentId, name);
+	}
+}	
+	
