@@ -31,6 +31,7 @@
 	<dubbo:reference interface="com.taotao.service.ItemService" id="itemService" timeout="300000"/>
 	<dubbo:reference interface="com.taotao.content.service.ContentCategoryService" id="contentCategoryService" timeout="300000"/>	
 	<dubbo:reference interface="com.taotao.content.service.ContentService" id="contentService" timeout="300000"/>	
+	<dubbo:reference interface="com.taotao.search.service.SearchService" id="searchService" timeout="300000"/>	
 
 	
 	
