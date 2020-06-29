@@ -7,8 +7,12 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
-	<bean class="org.apache.solr.client.solrj.impl.HttpSolrServer">
+	<!-- <bean class="org.apache.solr.client.solrj.impl.HttpSolrServer">
 		<constructor-arg name="baseURL" value="http://47.92.48.144:8080/solr"></constructor-arg>
+	</bean> -->
+	<bean class="org.apache.solr.client.solrj.impl.CloudSolrServer">
+		<constructor-arg name="zkHost" value="47.92.48.144:2181,47.92.48.144:2182,47.92.48.144:2183"></constructor-arg>
+		<property name="defaultCollection" value="collection2"></property>
 	</bean>
 	
 </beans>
